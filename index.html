@@ -3,139 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Moksh</title>
+<title>For Moksh 🌻</title>
 
 <style>
-    body {
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #fafafa, #fffef2);
-        font-family: 'Segoe UI', Roboto, sans-serif;
-        color: #333;
-    }
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to top, #87ceeb, #fff9c4);
+    height: 100vh;
+}
 
-    .card {
-        text-align: center;
-        padding: 40px 25px;
-        max-width: 360px;
-        width: 90%;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeIn 0.8s ease forwards;
-    }
+/* Grass */
+.garden {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #2e7d32, #66bb6a);
+}
 
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+/* Floating flowers */
+.flower {
+    position: absolute;
+    font-size: 30px;
+    animation: float 10s linear infinite;
+    opacity: 0.8;
+}
 
-    .flower-btn {
-        width: 220px;
-        cursor: pointer;
-        transition: transform 0.3s ease, filter 0.3s ease;
-        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.08));
-    }
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
 
-    .flower-btn:hover {
-        transform: scale(1.05);
-        filter: drop-shadow(0 20px 35px rgba(255, 215, 0, 0.25));
-    }
+/* Center content */
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    top: 35%;
+}
 
-    .flower-btn:active {
-        transform: scale(0.95);
-    }
+.big-rose {
+    font-size: 120px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-    .flower-btn.bounce {
-        animation: pop 0.5s ease;
-    }
+.big-rose:hover {
+    transform: scale(1.1);
+}
 
-    @keyframes pop {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
+.message {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #333;
+    opacity: 0;
+    transition: 0.5s ease;
+}
 
-    #message {
-        margin-top: 25px;
-        opacity: 0;
-        transform: translateY(15px);
-        transition: all 0.5s ease;
-    }
+.message.show {
+    opacity: 1;
+}
 
-    #message.show {
-        opacity: 1;
-        transform: translateY(0);
-    }
+button {
+    margin-top: 25px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #ffeb3b;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+}
 
-    h2 {
-        color: #bfa100;
-        font-size: 1.3rem;
-        margin-bottom: 8px;
-    }
+button:hover {
+    transform: scale(1.05);
+    background: #fdd835;
+}
 
-    p {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: #666;
-        margin: 6px 0;
-    }
+.hug-text {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    opacity: 0;
+}
 
-    .italic {
-        font-style: italic;
-        margin-top: 10px;
-    }
-
-    .hint {
-        margin-top: 30px;
-        font-size: 0.75rem;
-        color: #bbb;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        transition: opacity 0.3s ease;
-    }
+@keyframes hugAnim {
+    0% { opacity: 0; transform: translate(-50%, -40%) scale(0.8); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-    <img src="flower.png" alt="Yellow Rose" id="flower" class="flower-btn">
+<!-- Floating flowers -->
+<script>
+for (let i = 0; i < 15; i++) {
+    let f = document.createElement("div");
+    f.className = "flower";
+    f.innerHTML = "🌼";
+    f.style.left = Math.random() * window.innerWidth + "px";
+    f.style.animationDuration = (5 + Math.random() * 10) + "s";
+    document.body.appendChild(f);
+}
+</script>
 
-    <div id="message">
-        <h2>Saloni gave you a flower!</h2>
-        <p>Yellow roses for friendship ✨</p>
-        <p class="italic">
-            Tu mere bhai jaisa hai, so thought you deserved a little bloom today. 
-            Happy vibes, Moksh!
-        </p>
+<div class="container">
+    <div class="big-rose" onclick="showMessage()">🌻</div>
+
+    <div class="message" id="msg">
+        Saloni gave you a flower 🌼  
+        <br>You’re basically my brother.  
+        <br>So here’s your official garden hug moment.
     </div>
 
-    <div class="hint" id="hintText">Tap the flower</div>
+    <button onclick="sendHug()">Send Virtual Hug 🤗</button>
 </div>
 
+<div class="hug-text" id="hugText">🤗 BRO HUG ACTIVATED 💛</div>
+
+<div class="garden"></div>
+
 <script>
-    const flower = document.getElementById('flower');
-    const message = document.getElementById('message');
-    const hint = document.getElementById('hintText');
+function showMessage() {
+    document.getElementById("msg").classList.toggle("show");
+}
 
-    flower.addEventListener('click', () => {
-        message.classList.toggle('show');
-        flower.classList.add('bounce');
+function sendHug() {
+    let hug = document.getElementById("hugText");
+    hug.style.animation = "hugAnim 2s ease forwards";
 
-        hint.style.opacity = message.classList.contains('show') ? '0' : '1';
-
-        setTimeout(() => {
-            flower.classList.remove('bounce');
-        }, 500);
-    });
+    setTimeout(() => {
+        hug.style.animation = "none";
+    }, 2000);
+}
 </script>
 
 </body>
